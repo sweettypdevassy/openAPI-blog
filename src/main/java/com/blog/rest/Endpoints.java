@@ -14,4 +14,12 @@ public class Endpoints {
     public String sayHello() {
         return "Hello, Open Liberty with MicroProfile!";
     }
+
+    @POST // HTTP POST request
+    @Consumes(MediaType.APPLICATION_JSON) // Consumes JSON payload
+    @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
+    public String postMessage(String message) {
+        System.out.println(message);
+        return "Successfully recieved message";
+    }
 }
