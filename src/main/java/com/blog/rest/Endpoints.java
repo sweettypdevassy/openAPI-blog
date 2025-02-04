@@ -1,6 +1,7 @@
 package com.blog.rest;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -33,4 +34,14 @@ public class Endpoints {
         System.out.println(id +" "+ message);
         return "Updated the message";
     }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String deleteResource(@PathParam("id") String id) {
+        System.out.println("Deleting resource with ID: " + id);
+        return "Resource with ID " + id + " deleted successfully";
+    }
+
+
 }
