@@ -35,6 +35,7 @@ public class Endpoints {
     @Consumes(MediaType.APPLICATION_JSON) // Consumes JSON payload
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
     @Operation(summary = "Post a message", description = "Accepts a message and returns confirmation")
+    @APIResponse(responseCode = "200", description = "Message received successfully")
     public String postMessage(String message) {
         System.out.println(message);
         return "Successfully recieved message";
