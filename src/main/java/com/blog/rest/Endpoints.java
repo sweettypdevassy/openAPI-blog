@@ -26,6 +26,7 @@ public class Endpoints {
     @GET // HTTP GET request
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
     @Operation(summary = "Get a greeting message", description = "Returns a simple greeting from Open Liberty")
+    @APIResponse(responseCode = "200", description = "Successful response")
     public String sayHello() {
         return "Hello, Open Liberty with MicroProfile!";
     }
