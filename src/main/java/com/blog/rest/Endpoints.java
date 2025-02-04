@@ -56,6 +56,7 @@ public class Endpoints {
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(summary = "Delete a resource", description = "Deletes a message with the given ID")
+    @APIResponse(responseCode = "200", description = "Message deleted successfully")
     public String deleteResource(@PathParam("id") String id) {
         System.out.println("Deleting resource with ID: " + id);
         return "Resource with ID " + id + " deleted successfully";
