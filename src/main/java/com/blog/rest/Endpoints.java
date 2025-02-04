@@ -10,6 +10,13 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+@OpenAPIDefinition(
+    info = @Info(title = "Blog API", version = "1.0", description = "API for managing blog resources"),
+    tags = {
+        @Tag(name = "Blog", description = "Operations related to blog management")
+    }
+)
+
 @Path("/hello")
 public class Endpoints {
     @GET // HTTP GET request
