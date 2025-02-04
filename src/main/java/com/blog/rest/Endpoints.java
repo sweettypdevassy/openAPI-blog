@@ -46,6 +46,7 @@ public class Endpoints {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(summary = "Update a resource", description = "Updates a message for a given ID")
+    @APIResponse(responseCode = "200", description = "Message updated successfully")
     public String updateResource(@PathParam("id") String id, String message) {
         System.out.println(id +" "+ message);
         return "Updated the message";
