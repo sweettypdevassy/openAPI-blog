@@ -9,11 +9,24 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.info.Info;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+@OpenAPIDefinition(
+    info = @Info(title = "Blog API", version = "1.0", description = "API for managing blog resources"),
+    tags = {
+        @Tag(name = "Blog", description = "Operations related to blog management")
+    }
+)
 
 @Path("/hello")
 public class Endpoints {
     @GET // HTTP GET request
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
+    @Operation(summary = "Get a greeting message", description = "Returns a simple greeting from Open Liberty")
+    @APIResponse(responseCode = "200", description = "Successful response")
     public String sayHello() {
         return "Hello, Open Liberty with MicroProfile!";
     }
@@ -21,6 +34,8 @@ public class Endpoints {
     @POST // HTTP POST request
     @Consumes(MediaType.APPLICATION_JSON) // Consumes JSON payload
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
+    @Operation(summary = "Post a message", description = "Accepts a message and returns confirmation")
+    @APIResponse(responseCode = "200", description = "Message received successfully")
     public String postMessage(String message) {
         System.out.println(message);
         return "Successfully recieved message";
@@ -30,6 +45,8 @@ public class Endpoints {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
+    @Operation(summary = "Update a resource", description = "Updates a message for a given ID")
+    @APIResponse(responseCode = "200", description = "Message updated successfully")
     public String updateResource(@PathParam("id") String id, String message) {
         System.out.println(id +" "+ message);
         return "Updated the message";
@@ -38,6 +55,8 @@ public class Endpoints {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
+    @Operation(summary = "Delete a resource", description = "Deletes a message with the given ID")
+    @APIResponse(responseCode = "200", description = "Message deleted successfully")
     public String deleteResource(@PathParam("id") String id) {
         System.out.println("Deleting resource with ID: " + id);
         return "Resource with ID " + id + " deleted successfully";
