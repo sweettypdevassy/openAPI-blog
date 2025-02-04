@@ -10,7 +10,9 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @OpenAPIDefinition(
     info = @Info(title = "Blog API", version = "1.0", description = "API for managing blog resources"),
@@ -23,6 +25,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 public class Endpoints {
     @GET // HTTP GET request
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
+    @Operation(summary = "Get a greeting message", description = "Returns a simple greeting from Open Liberty")
     public String sayHello() {
         return "Hello, Open Liberty with MicroProfile!";
     }
