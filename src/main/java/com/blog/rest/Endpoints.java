@@ -3,7 +3,9 @@ package com.blog.rest;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -21,5 +23,14 @@ public class Endpoints {
     public String postMessage(String message) {
         System.out.println(message);
         return "Successfully recieved message";
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String updateResource(@PathParam("id") String id, String message) {
+        System.out.println(id +" "+ message);
+        return "Updated the message";
     }
 }
