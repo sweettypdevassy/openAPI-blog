@@ -34,6 +34,7 @@ public class Endpoints {
     @POST // HTTP POST request
     @Consumes(MediaType.APPLICATION_JSON) // Consumes JSON payload
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
+    @Operation(summary = "Post a message", description = "Accepts a message and returns confirmation")
     public String postMessage(String message) {
         System.out.println(message);
         return "Successfully recieved message";
