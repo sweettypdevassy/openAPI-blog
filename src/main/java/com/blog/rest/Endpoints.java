@@ -1,5 +1,6 @@
 package com.blog.rest;
 
+import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -14,13 +15,13 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+@ApplicationPath("/api")
 @OpenAPIDefinition(
     info = @Info(title = "Blog API", version = "1.0", description = "API for managing blog resources"),
     tags = {
         @Tag(name = "Blog", description = "Operations related to blog management")
     }
 )
-
 @Path("/hello")
 public class Endpoints {
     @GET // HTTP GET request
