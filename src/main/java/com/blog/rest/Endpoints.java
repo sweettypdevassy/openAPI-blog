@@ -1,5 +1,4 @@
 package com.blog.rest;
-
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -13,17 +12,24 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
+import org.eclipse.microprofile.openapi.annotations.info.Contact;
+import jakarta.ws.rs.core.Application;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @ApplicationPath("/api")
 @OpenAPIDefinition(
-    info = @Info(title = "Blog API", version = "1.0", description = "API for managing blog resources"),
+    info = @Info(
+        title = "Blog API",
+        version = "1.0",
+        description = "This is an example API using MicroProfile OpenAPI",
+        contact = @Contact(name = "Sweetty", email = "sweettypdevassy@gmail.com")
+    ),
     tags = {
         @Tag(name = "Blog", description = "Operations related to blog management")
     }
 )
 @Path("/hello")
-public class Endpoints {
+public class Endpoints extends Application {
     @GET // HTTP GET request
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
     @Operation(summary = "Get a greeting message", description = "Returns a simple greeting from Open Liberty")
@@ -65,3 +71,6 @@ public class Endpoints {
 
 
 }
+
+
+
