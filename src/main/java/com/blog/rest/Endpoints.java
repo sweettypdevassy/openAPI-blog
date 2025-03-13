@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
+import org.eclipse.microprofile.openapi.annotations.info.License;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -25,7 +26,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
         title = "Blog API",
         version = "1.0",
         description = "This is an example API using MicroProfile OpenAPI",
-        contact = @Contact(name = "Sweetty", email = "sweettypdevassy@gmail.com")
+        contact = @Contact(name = "Sweetty", email = "sweetty@gmail.com"),
+        license = @License(name = "Apache 2.0", url = "https://apache.org/licenses/LICENSE-2.0.html")
     ),
     tags = {
         @Tag(name = "Blog", description = "Operations related to blog management")
