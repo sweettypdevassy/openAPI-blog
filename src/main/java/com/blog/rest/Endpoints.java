@@ -30,7 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
         contact = @Contact(name = "Sweetty", email = "sweetty@gmail.com"),
         license = @License(name = "Apache 2.0", url = "https://apache.org/licenses/LICENSE-2.0.html")
     ),
-    servers = @Server(url = "http://localhost:9081/api", description = "Localhost Server"),
+    servers = @Server(url = "http://localhost:9081/openapi-demo", description = "Localhost Server"),
     tags = {
         @Tag(name = "Blog", description = "Operations related to blog management")
     }
