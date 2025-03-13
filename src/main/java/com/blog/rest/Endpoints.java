@@ -12,6 +12,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
@@ -62,10 +63,11 @@ public class Endpoints extends Application {
     @Path("/user/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Get User by ID", description = "Returns the user details for a given ID")
+    @APIResponses({
     @APIResponse(responseCode = "200", description = "Successful Response", content = @Content(
         mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = User.class)
-    ))
-    @APIResponse(responseCode = "404", description = "User not found")
+    )),
+    @APIResponse(responseCode = "404", description = "User not found")})
     public User getUser(
         @Parameter(description = "User ID", required = true) 
         @PathParam("id") String id) {
@@ -77,8 +79,9 @@ public class Endpoints extends Application {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(summary = "Post a message", description = "Accepts a message and returns confirmation")
-    @APIResponse(responseCode = "200", description = "Message received successfully")
-    @APIResponse(responseCode = "400", description = "Invalid request format")
+    @APIResponses({
+    @APIResponse(responseCode = "200", description = "Message received successfully"),
+    @APIResponse(responseCode = "400", description = "Invalid request format")})
     @SecurityRequirement(name = "jwtAuth")
     public String postMessage(String message) {
         System.out.println(message);
@@ -90,8 +93,9 @@ public class Endpoints extends Application {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(summary = "Update a resource", description = "Updates a message for a given ID")
-    @APIResponse(responseCode = "200", description = "Message updated successfully")
-    @APIResponse(responseCode = "404", description = "Resource not found")
+    @APIResponses({
+    @APIResponse(responseCode = "200", description = "Message updated successfully"),
+    @APIResponse(responseCode = "404", description = "Resource not found")})
     @SecurityRequirement(name = "jwtAuth")
     public String updateResource(@PathParam("id") String id, String message) {
         System.out.println(id + " " + message);
@@ -102,8 +106,9 @@ public class Endpoints extends Application {
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(summary = "Delete a resource", description = "Deletes a message with the given ID")
-    @APIResponse(responseCode = "200", description = "Message deleted successfully")
-    @APIResponse(responseCode = "404", description = "Resource not found")
+    @APIResponses({
+    @APIResponse(responseCode = "200", description = "Message deleted successfully"),
+    @APIResponse(responseCode = "404", description = "Resource not found")})
     @SecurityRequirement(name = "jwtAuth")
     public String deleteResource(@PathParam("id") String id) {
         System.out.println("Deleting resource with ID: " + id);
