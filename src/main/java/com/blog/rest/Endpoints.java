@@ -14,6 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import jakarta.ws.rs.core.Application;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -41,6 +42,22 @@ public class Endpoints extends Application {
         ))
     public String sayHello() {
         return "Hello, Open Liberty with MicroProfile!!";
+    }
+    @GET
+    @Path("/user/{id}")
+    @Produces(MediaType.TEXT_PLAIN)  // Explicitly set response type
+    @Operation(summary = "Get User by ID", description = "Returns the user ID as a string")
+    @APIResponse(
+        responseCode = "200",
+        description = "Successful Response",
+        content = @Content(mediaType = MediaType.TEXT_PLAIN, 
+                           schema = @Schema(implementation = String.class))
+    )
+    public String getUser(
+        @Parameter(description = "User ID", required = true) 
+        @PathParam("id") String id) {
+        
+        return "User ID: " + id;
     }
 
     @POST // HTTP POST request
