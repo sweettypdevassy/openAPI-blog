@@ -12,6 +12,8 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import jakarta.ws.rs.core.Application;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -33,9 +35,12 @@ public class Endpoints extends Application {
     @GET // HTTP GET request
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
     @Operation(summary = "Get a greeting message", description = "Returns a simple greeting from Open Liberty")
-    @APIResponse(responseCode = "200", description = "Successful response")
+    @APIResponse(responseCode = "200", description = "Successful response",content = @Content(
+            mediaType = MediaType.TEXT_PLAIN,
+            schema = @Schema(implementation = String.class, example = "Hello, Open Liberty with MicroProfile!")
+        ))
     public String sayHello() {
-        return "Hello, Open Liberty with MicroProfile!";
+        return "Hello, Open Liberty with MicroProfile!!";
     }
 
     @POST // HTTP POST request
