@@ -12,9 +12,14 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
+import org.eclipse.microprofile.openapi.annotations.info.License;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import jakarta.ws.rs.core.Application;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @ApplicationPath("/api")
 @OpenAPIDefinition(
@@ -22,8 +27,10 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
         title = "Blog API",
         version = "1.0",
         description = "This is an example API using MicroProfile OpenAPI",
-        contact = @Contact(name = "Sweetty", email = "sweettypdevassy@gmail.com")
+        contact = @Contact(name = "Sweetty", email = "sweetty@gmail.com"),
+        license = @License(name = "Apache 2.0", url = "https://apache.org/licenses/LICENSE-2.0.html")
     ),
+    servers = @Server(url = "http://localhost:9081/openapi-demo", description = "Localhost Server"),
     tags = {
         @Tag(name = "Blog", description = "Operations related to blog management")
     }
@@ -33,11 +40,37 @@ public class Endpoints extends Application {
     @GET // HTTP GET request
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
     @Operation(summary = "Get a greeting message", description = "Returns a simple greeting from Open Liberty")
-    @APIResponse(responseCode = "200", description = "Successful response")
+    @APIResponse(responseCode = "200", description = "Successful response",content = @Content(
+            mediaType = MediaType.TEXT_PLAIN,
+            schema = @Schema(implementation = String.class, example = "Hello, Open Liberty with MicroProfile!")
+        ))
     public String sayHello() {
-        return "Hello, Open Liberty with MicroProfile!";
+        return "Hello, Open Liberty with MicroProfile!!";
     }
+    @GET
+    @Path("/user/{id}")
+    @Produces(MediaType.TEXT_PLAIN)  // Explicitly set response type
+    @Operation(summary = "Get User by ID", description = "Returns the user ID as a string")
+    @APIResponse(
+        responseCode = "200",
+        description = "Successful Response",
+        content = @Content(mediaType = MediaType.TEXT_PLAIN, 
+                           schema = @Schema(implementation = String.class))
+    )
+    public String getUser(
+        @Parameter(description = "User ID", required = true) 
+        @PathParam("id") String id) {
+        
+        return "User ID: " + id;
+    }
+    @Schema(description = "User model")
+    public class User {
+        @Schema(description = "Unique user ID", example = "123")
+        public String id;
 
+        @Schema(description = "User name", example = "John Doe")
+        public String name;
+    }
     @POST // HTTP POST request
     @Consumes(MediaType.APPLICATION_JSON) // Consumes JSON payload
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
