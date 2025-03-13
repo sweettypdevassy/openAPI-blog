@@ -59,7 +59,14 @@ public class Endpoints extends Application {
         
         return "User ID: " + id;
     }
+    @Schema(description = "User model")
+    public class User {
+        @Schema(description = "Unique user ID", example = "123")
+        public String id;
 
+        @Schema(description = "User name", example = "John Doe")
+        public String name;
+    }
     @POST // HTTP POST request
     @Consumes(MediaType.APPLICATION_JSON) // Consumes JSON payload
     @Produces(MediaType.TEXT_PLAIN) // Produces plain text response
