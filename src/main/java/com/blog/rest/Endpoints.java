@@ -32,8 +32,18 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
     servers = @Server(url = "http://localhost:9081/openapi-demo", description = "Localhost Server"),
     tags = {
         @Tag(name = "Blog", description = "Operations related to blog management")
-    }
+    },
+    security = @SecurityRequirement(name = "jwtAuth")
 )
+@SecuritySchemes({
+    @SecurityScheme(
+        securitySchemeName = "jwtAuth",
+        description = "JWT Authentication",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+    )
+})
 
 @Path("/hello")
 public class Endpoints extends Application {
@@ -70,7 +80,7 @@ public class Endpoints extends Application {
     @Operation(summary = "Post a message", description = "Accepts a message and returns confirmation")
     @APIResponse(responseCode = "200", description = "Message received successfully")
     @APIResponse(responseCode = "400", description = "Invalid request format")
-    
+    @SecurityRequirement(name = "jwtAuth")
     public String postMessage(String message) {
         System.out.println(message);
         return "Successfully received message";
@@ -83,7 +93,7 @@ public class Endpoints extends Application {
     @Operation(summary = "Update a resource", description = "Updates a message for a given ID")
     @APIResponse(responseCode = "200", description = "Message updated successfully")
     @APIResponse(responseCode = "404", description = "Resource not found")
-   
+    @SecurityRequirement(name = "jwtAuth")
     public String updateResource(@PathParam("id") String id, String message) {
         System.out.println(id + " " + message);
         return "Updated the message";
@@ -95,7 +105,7 @@ public class Endpoints extends Application {
     @Operation(summary = "Delete a resource", description = "Deletes a message with the given ID")
     @APIResponse(responseCode = "200", description = "Message deleted successfully")
     @APIResponse(responseCode = "404", description = "Resource not found")
-    
+    @SecurityRequirement(name = "jwtAuth")
     public String deleteResource(@PathParam("id") String id) {
         System.out.println("Deleting resource with ID: " + id);
         return "Resource with ID " + id + " deleted successfully";
