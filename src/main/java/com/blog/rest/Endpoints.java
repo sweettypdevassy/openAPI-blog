@@ -50,6 +50,7 @@ public class Endpoints extends Application {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
+    @Tag(name = "Blog")
     @Operation(summary = "Get a greeting message", description = "Returns a simple greeting from Open Liberty")
     @APIResponse(responseCode = "200", description = "Successful response", content = @Content(
         mediaType = MediaType.TEXT_PLAIN,
@@ -62,6 +63,7 @@ public class Endpoints extends Application {
     @GET
     @Path("/user/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Tag(name = "Blog")
     @Operation(summary = "Get User by ID", description = "Returns the user details for a given ID")
     @APIResponses({
     @APIResponse(responseCode = "200", description = "Successful Response", content = @Content(
@@ -78,6 +80,7 @@ public class Endpoints extends Application {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
+    @Tag(name = "Blog")
     @Operation(summary = "Post a message", description = "Accepts a message and returns confirmation")
     @APIResponses({
     @APIResponse(responseCode = "200", description = "Message received successfully"),
@@ -92,6 +95,7 @@ public class Endpoints extends Application {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
+    @Tag(name = "Blog")
     @Operation(summary = "Update a resource", description = "Updates a message for a given ID")
     @APIResponses({
     @APIResponse(responseCode = "200", description = "Message updated successfully"),
@@ -105,6 +109,7 @@ public class Endpoints extends Application {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
+    @Tag(name = "Blog")
     @Operation(summary = "Delete a resource", description = "Deletes a message with the given ID")
     @APIResponses({
     @APIResponse(responseCode = "200", description = "Message deleted successfully"),
